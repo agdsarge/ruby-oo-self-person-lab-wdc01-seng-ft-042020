@@ -1,15 +1,15 @@
 # your code goes here
 class Person
-    
+
     attr_reader :name, :hygiene, :bank_account, :happiness
-    
+
     def initialize(name)
         @name = name
         @bank_account = 25
         @happiness = 8
         @hygiene = 8
     end
-   
+
 
     def change_happiness(new_score)
         if new_score >= 10
@@ -65,6 +65,19 @@ class Person
         "Hi #{friend.name}! It's #{self.name}. How are you?"
     end
 
+    def start_conversation(starter, topic)
+        if topic == "politics"
+            starter.change_happiness(starter.happiness - 2)
+            self.change_happiness(@happiness - 2)
+            "blah blah partisan blah lobbyist"
+        elsif topic == "weather"
+            starter.change_happiness(starter.happiness + 1)
+            self.change_happiness(@happiness + 1)
+            "blah blah sun blah rain"
+        else
+            "blah blah blah blah blah"
+        end
+    end
 end
 
 
@@ -87,3 +100,9 @@ puts bob_dylan.work_out
 puts bob_dylan.hygiene
 puts bob_dylan.happiness
 puts stella.call_friend(bob_dylan)
+
+stella.change_happiness(5)
+bob_dylan.change_happiness(5)
+puts bob_dylan.start_conversation(stella, "baseball")
+puts bob_dylan.happiness
+puts stella.happiness
