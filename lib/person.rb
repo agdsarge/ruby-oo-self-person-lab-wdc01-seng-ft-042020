@@ -1,8 +1,8 @@
 # your code goes here
 class Person
 
-    attr_reader :name, :hygiene, :bank_account, :happiness
-
+    attr_reader :hygiene, :happiness, :name
+    attr_accessor :bank_account
     def initialize(name)
         @name = name
         @bank_account = 25
@@ -11,7 +11,7 @@ class Person
     end
 
 
-    def change_happiness(new_score)
+    def happiness=(new_score)
         if new_score >= 10
             @happiness = 10
         elsif new_score <= 0
@@ -21,7 +21,7 @@ class Person
         end
     end
 
-    def change_hygiene(new_score)
+    def hygiene=(new_score)
         if new_score >= 10
             @hygiene = 10
         elsif new_score <= 0
@@ -49,60 +49,33 @@ class Person
     end
 
     def take_bath
-        self.change_hygiene(@hygiene + 4)
+        self.hygiene=(@hygiene + 4)
         "♪ Rub-a-dub just relaxing in the tub ♫"
     end
 
     def work_out
-        self.change_hygiene(@hygiene -3)
-        self.change_happiness(@happiness + 2)
+        self.hygiene=(@hygiene -3)
+        self.happiness=(@happiness + 2)
         "♪ another one bites the dust ♫"
     end
 
     def call_friend(friend)
-        friend.change_happiness(friend.happiness + 3)
-        self.change_happiness(@happiness + 3)
+        friend.happiness=(friend.happiness + 3)
+        self.happiness=(@happiness + 3)
         "Hi #{friend.name}! It's #{self.name}. How are you?"
     end
 
     def start_conversation(starter, topic)
         if topic == "politics"
-            starter.change_happiness(starter.happiness - 2)
-            self.change_happiness(@happiness - 2)
+            starter.happiness=(starter.happiness - 2)
+            self.happiness=(@happiness - 2)
             "blah blah partisan blah lobbyist"
         elsif topic == "weather"
-            starter.change_happiness(starter.happiness + 1)
-            self.change_happiness(@happiness + 1)
+            starter.happiness=(starter.happiness + 1)
+            self.happiness=(@happiness + 1)
             "blah blah sun blah rain"
         else
             "blah blah blah blah blah"
         end
     end
 end
-
-
-bob_dylan = Person.new("bob")
-stella = Person.new("stella")
-
-bob_dylan.change_hygiene(2)
-#puts bob_dylan.hygiene
-
-bob_dylan.change_bank_account(100)
-puts bob_dylan.bank_account
-
-puts bob_dylan.happy?
-
-puts bob_dylan.get_paid(2000)
-puts bob_dylan.bank_account
-puts bob_dylan.take_bath
-puts bob_dylan.hygiene
-puts bob_dylan.work_out
-puts bob_dylan.hygiene
-puts bob_dylan.happiness
-puts stella.call_friend(bob_dylan)
-
-stella.change_happiness(5)
-bob_dylan.change_happiness(5)
-puts bob_dylan.start_conversation(stella, "baseball")
-puts bob_dylan.happiness
-puts stella.happiness
