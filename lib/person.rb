@@ -59,12 +59,17 @@ class Person
         "♪ another one bites the dust ♫"
     end
 
-   
+    def call_friend(friend)
+        friend.change_happiness(friend.happiness + 3)
+        self.change_happiness(@happiness + 3)
+        "Hi #{friend.name}! It's #{self.name}. How are you?"
+    end
 
 end
 
 
 bob_dylan = Person.new("bob")
+stella = Person.new("stella")
 
 bob_dylan.change_hygiene(2)
 #puts bob_dylan.hygiene
@@ -81,3 +86,4 @@ puts bob_dylan.hygiene
 puts bob_dylan.work_out
 puts bob_dylan.hygiene
 puts bob_dylan.happiness
+puts stella.call_friend(bob_dylan)
